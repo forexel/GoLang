@@ -1,4 +1,4 @@
-module GOLANG-1/Lesson8
+module GOLANG-1/Lesson9
 
 go 1.18
 
