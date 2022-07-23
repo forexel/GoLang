@@ -3,29 +3,27 @@ package main
 import "fmt"
 
 // описываю функцию фибонначи
-func fib(n uint) uint {
-	m := make(map[uint]uint,n)
-	if n == 0 { //если индекс = 0, то выводим 0
-		return 0
-	} else if n == 1 { //Если индекс равен 1, то выводим 1
-		return 1
-	} else {
-	if m[n-1] == 0 { //если элемент мапы равен 0
-	m[n-1] = fib(n-1) + fib(n-2) //присываеваем мапе значение суммы предыдущих чисел
-	return m[n-1] //возвращаем элемент мапы
-	} else {
-		return m[n-1] //если элемент мапы не равен нулю, то возвращаем элемент мапы
+func fib(n uint, hash map[uint]uint) uint {
+	if n < 2 { //если индекс = 0, то выводим 0
+		return n
 	}
-}
+	if val, ok := hash[n]; ok {
+		return val
+	}
+
+	hash[n] = fib(n-1, hash) + fib(n-2, hash)
+
+	return hash[n]
 }
 
 func main() {
 	var n uint
+	hash := make(map[uint]uint)
 	fmt.Println("Введите порядковый номер числа Фибоначчи:")
 	fmt.Scanln(&n)
 	if n < 1 {
 		fmt.Println("Некорректный номер элемента")
 	} else {
-		fmt.Println(fib(n-1)) //ищем значение элемента с индексом порядковый номер-1
+		fmt.Println(fib((n - 1), hash)) //ищем значение элемента с индексом порядковый номер-1
 	}
 }
