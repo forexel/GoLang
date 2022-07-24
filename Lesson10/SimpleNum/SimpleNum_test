@@ -1,0 +1,34 @@
+package fib
+
+import "testing"
+import "errors"
+
+type testCase struct {
+	name          string
+	input        float64
+	expected      float64
+	expectedError error
+}
+
+func testfiboptimized(t *testing.T) {
+	testCases := []testCase{
+		{"Test1", 1, 1, nil},
+		{"Test5", 5, 7, nil},
+		{"Test10", 10, 23, nil},
+		{"Test-2", -2, 0, ErrorNotFound},
+	}
+
+	for _, cse := range testCases {
+		cse := cse
+		t.Run(cse.name, func(t *testing.T))
+		result, err := fSimpleNum(cse.input)
+		if !errors.Is(err, cse.expectedError) {
+			t.Errorf("unexpected err: %v", err)
+			return
+		}
+		if result != cse.expected {
+			t.Errorf("Неверный результат для %d ожидали %d а получили", cse.input, cse.expected, result)
+		}
+	}
+
+}
