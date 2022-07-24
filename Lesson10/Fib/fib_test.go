@@ -10,7 +10,7 @@ type testCase struct {
 	expectedError error
 }
 
-func testfiboptimized(t *testing.T) {
+func testFibOptimized(t *testing.T) {
 	testCases := []testCase{
 		{"Test10", 10, 55, nil},
 		{"Test9", 9, 34, nil},
@@ -31,4 +31,13 @@ func testfiboptimized(t *testing.T) {
 		}
 	}
 
+}
+
+func BenchmarkFibOptimized(b *testing.B) {
+    for i := 0; i < b.N; i++ {
+		FibOptimized(15,make(map[int]int))
+        if x := fmt.Sprintf("%d", 42); x != "42" {
+            b.Fatalf("Unexpected string: %s", x)
+        }
+    }
 }
