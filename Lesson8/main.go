@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
     
-    "GOLANG-1/Lesson8/configparse"
+    "../Lesson8/configparse"
 )
 
 type AppConfig struct {
